@@ -84,6 +84,46 @@ export function createApp({ databasePath = defaultDatabasePath } = {}) {
     return response.json(toTask(task))
   })
 
+  app.put('/api/tasks/:taskId', (request, response) => {
+    const { errors, value } = validateTask(request.body, {
+      requireCompleted: true,
+    })
+    if (Object.keys(errors).length > 0) {
+      return response.status(422).json({ errors })
+    }
+
+    const result = database
+      .prepare(
+        `
+          UPDATE tasks
+          SET title = ?, description = ?, completed = ?
+          WHERE id = ?
+        `,
+      )
+      .run(
+        value.title,
+        value.description,
+        Number(value.completed),
+        request.params.taskId,
+      )
+
+    if (result.changes === 0) {
+      return response.status(404).json({ error: 'Task not found' })
+    }
+
+    const task = database
+      .prepare(
+        `
+          SELECT id, title, description, completed
+          FROM tasks
+          WHERE id = ?
+        `,
+      )
+      .get(request.params.taskId)
+
+    return response.json(toTask(task))
+  })
+
   return { app, database }
 }
 
