@@ -6,9 +6,11 @@ class TaskCreate(BaseModel):
     description: str | None = Field(default=None, max_length=500)
     completed: bool = False
 
-    @field_validator("title")
+    @field_validator("title", mode="before")
     @classmethod
-    def normalize_title(cls, value: str) -> str:
+    def normalize_title(cls, value: object) -> object:
+        if not isinstance(value, str):
+            return value
         normalized = value.strip()
         if not normalized:
             raise ValueError("Title is required")
