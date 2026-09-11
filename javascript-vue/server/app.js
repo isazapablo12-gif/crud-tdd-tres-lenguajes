@@ -5,6 +5,8 @@ import { DatabaseSync } from 'node:sqlite'
 
 import express from 'express'
 
+import { validateTask } from './validation.js'
+
 const currentDirectory = dirname(fileURLToPath(import.meta.url))
 const defaultDatabasePath = resolve(currentDirectory, '..', 'data', 'tasks.sqlite')
 
@@ -37,6 +39,33 @@ export function createApp({ databasePath = defaultDatabasePath } = {}) {
     response.json(tasks)
   })
 
+  app.post('/api/tasks', (request, response) => {
+    const { errors, value } = validateTask(request.body)
+    if (Object.keys(errors).length > 0) {
+      return response.status(422).json({ errors })
+    }
+
+    const result = database
+      .prepare(
+        `
+          INSERT INTO tasks (title, description, completed)
+          VALUES (?, ?, ?)
+        `,
+      )
+      .run(value.title, value.description, Number(value.completed))
+    const task = database
+      .prepare(
+        `
+          SELECT id, title, description, completed
+          FROM tasks
+          WHERE id = ?
+        `,
+      )
+      .get(result.lastInsertRowid)
+
+    return response.status(201).json(toTask(task))
+  })
+
   return { app, database }
 }
 
@@ -48,4 +77,3 @@ function toTask(row) {
     completed: Boolean(row.completed),
   }
 }
-
