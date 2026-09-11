@@ -103,3 +103,20 @@ def test_update_missing_task_returns_404(client):
 
     assert response.status_code == 404
     assert response.json() == {"detail": "Task not found"}
+
+
+def test_delete_existing_task_removes_it(client):
+    created = client.post("/api/tasks", json={"title": "Temporal"}).json()
+
+    response = client.delete(f"/api/tasks/{created['id']}")
+
+    assert response.status_code == 204
+    assert response.content == b""
+    assert client.get(f"/api/tasks/{created['id']}").status_code == 404
+
+
+def test_delete_missing_task_returns_404(client):
+    response = client.delete("/api/tasks/999")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Task not found"}
