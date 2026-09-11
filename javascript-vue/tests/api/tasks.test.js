@@ -118,6 +118,25 @@ describe('Tasks API', () => {
     expect(response.status).toBe(404)
     expect(response.body).toEqual({ error: 'Task not found' })
   })
+
+  test('deletes an existing task', async () => {
+    const created = await createTask(app, { title: 'Temporal' })
+
+    const response = await request(app).delete(`/api/tasks/${created.id}`)
+
+    expect(response.status).toBe(204)
+    expect(response.text).toBe('')
+
+    const getResponse = await request(app).get(`/api/tasks/${created.id}`)
+    expect(getResponse.status).toBe(404)
+  })
+
+  test('returns 404 when deleting a missing task', async () => {
+    const response = await request(app).delete('/api/tasks/999')
+
+    expect(response.status).toBe(404)
+    expect(response.body).toEqual({ error: 'Task not found' })
+  })
 })
 
 async function createTask(app, payload) {
