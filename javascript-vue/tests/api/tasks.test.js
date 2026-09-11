@@ -78,6 +78,46 @@ describe('Tasks API', () => {
     expect(response.status).toBe(404)
     expect(response.body).toEqual({ error: 'Task not found' })
   })
+
+  test('updates an existing task and persists the changes', async () => {
+    const created = await createTask(app, { title: 'Borrador' })
+    const payload = {
+      title: 'Versión final',
+      description: 'Lista para exponer',
+      completed: true,
+    }
+
+    const response = await request(app)
+      .put(`/api/tasks/${created.id}`)
+      .send(payload)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual({ id: created.id, ...payload })
+
+    const getResponse = await request(app).get(`/api/tasks/${created.id}`)
+    expect(getResponse.body).toEqual(response.body)
+  })
+
+  test('rejects invalid data when updating a task', async () => {
+    const created = await createTask(app, { title: 'Borrador' })
+
+    const response = await request(app)
+      .put(`/api/tasks/${created.id}`)
+      .send({ title: '   ', description: null, completed: false })
+
+    expect(response.status).toBe(422)
+  })
+
+  test('returns 404 when updating a missing task', async () => {
+    const response = await request(app).put('/api/tasks/999').send({
+      title: 'No existe',
+      description: null,
+      completed: false,
+    })
+
+    expect(response.status).toBe(404)
+    expect(response.body).toEqual({ error: 'Task not found' })
+  })
 })
 
 async function createTask(app, payload) {
