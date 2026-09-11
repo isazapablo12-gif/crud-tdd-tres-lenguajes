@@ -124,6 +124,18 @@ export function createApp({ databasePath = defaultDatabasePath } = {}) {
     return response.json(toTask(task))
   })
 
+  app.delete('/api/tasks/:taskId', (request, response) => {
+    const result = database
+      .prepare('DELETE FROM tasks WHERE id = ?')
+      .run(request.params.taskId)
+
+    if (result.changes === 0) {
+      return response.status(404).json({ error: 'Task not found' })
+    }
+
+    return response.status(204).send()
+  })
+
   return { app, database }
 }
 
