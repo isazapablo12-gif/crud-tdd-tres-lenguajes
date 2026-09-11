@@ -50,6 +50,18 @@ def test_create_task_trims_title(client):
     assert response.json()["title"] == "Estudiar TDD"
 
 
+def test_create_task_validates_limits_after_trimming(client):
+    accepted = client.post("/api/tasks", json={"title": f"  {'a' * 100}  "})
+    rejected = client.post(
+        "/api/tasks",
+        json={"title": "Válida", "description": "a" * 501},
+    )
+
+    assert accepted.status_code == 201
+    assert len(accepted.json()["title"]) == 100
+    assert rejected.status_code == 422
+
+
 def test_get_existing_task_by_id(client):
     created = client.post(
         "/api/tasks",
