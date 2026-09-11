@@ -13,6 +13,11 @@ class Task extends Model
     /** @use HasFactory<TaskFactory> */
     use HasFactory;
 
+    /** @var array<string, mixed> */
+    protected $attributes = [
+        'completed' => false,
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
