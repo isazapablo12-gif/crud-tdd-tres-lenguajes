@@ -1,10 +1,18 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class TaskCreate(BaseModel):
-    title: str
+    title: str = Field(min_length=1, max_length=100)
     description: str | None = Field(default=None, max_length=500)
     completed: bool = False
+
+    @field_validator("title")
+    @classmethod
+    def normalize_title(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized:
+            raise ValueError("Title is required")
+        return normalized
 
 
 class TaskResponse(BaseModel):
@@ -12,4 +20,3 @@ class TaskResponse(BaseModel):
     title: str
     description: str | None
     completed: bool
-
