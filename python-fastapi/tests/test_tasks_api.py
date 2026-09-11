@@ -4,3 +4,23 @@ def test_list_tasks_returns_empty_collection(client):
     assert response.status_code == 200
     assert response.json() == []
 
+
+def test_create_task_persists_and_returns_it(client):
+    response = client.post(
+        "/api/tasks",
+        json={
+            "title": "Preparar exposición",
+            "description": "Repasar el ciclo TDD",
+        },
+    )
+
+    assert response.status_code == 201
+    assert response.json() == {
+        "id": 1,
+        "title": "Preparar exposición",
+        "description": "Repasar el ciclo TDD",
+        "completed": False,
+    }
+
+    list_response = client.get("/api/tasks")
+    assert list_response.json() == [response.json()]
