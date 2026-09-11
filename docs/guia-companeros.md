@@ -103,8 +103,8 @@ Abrir `http://localhost:5173` y hacer lo siguiente:
 ### Ciclo TDD que puede enseñar
 
 ```powershell
-git show 876544f
-git show e9ce970
+git show e0ebe6c
+git show b4302b6
 ```
 
 El primer commit define mediante pruebas la carga y creación desde Vue; el segundo agrega la interfaz mínima que cumple esas expectativas.
@@ -153,8 +153,8 @@ Abrir `http://127.0.0.1:8001/docs`:
 ### Ciclo TDD que puede enseñar
 
 ```powershell
-git show dc7f609
-git show 64484b3
+git show d034d7a
+git show 5ff760d
 ```
 
 El primer commit exige crear y persistir una tarea; el segundo implementa el repositorio SQLite y el endpoint necesario para volver verde la prueba.
@@ -227,8 +227,8 @@ Invoke-WebRequest -SkipHttpErrorCheck -Method Post -Uri $url `
 ### Ciclo TDD que puede enseñar
 
 ```powershell
-git show 58e8ce9
-git show 9d10be2
+git show 9557c74
+git show f88e046
 ```
 
 El primer commit agrega pruebas de creación y validación que fallan; el segundo incorpora Form Request, controlador, recurso y modelo para cumplirlas.

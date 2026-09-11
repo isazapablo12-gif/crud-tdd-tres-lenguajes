@@ -6,13 +6,13 @@ El historial se diseñó para que el proceso sea auditable. En cada fila, el pri
 
 | Comportamiento | Commit rojo | Commit verde |
 | --- | --- | --- |
-| Listado vacío | `e2ab51b` | `4007544` |
-| Crear y persistir | `dc7f609` | `64484b3` |
-| Validar y normalizar título | `ecb2695` | `5cf297d` |
-| Consultar por ID y devolver 404 | `198a0ec` | `2b37686` |
-| Actualizar y validar | `40031a1` | `11f8366` |
-| Eliminar y devolver 404 | `c770567` | `75cb4ea` |
-| Validar límites después de normalizar | `218a76a` | `45d18f5` |
+| Listado vacío | `36cbcaf` | `38cf063` |
+| Crear y persistir | `d034d7a` | `5ff760d` |
+| Validar y normalizar título | `9eff3aa` | `5d2099f` |
+| Consultar por ID y devolver 404 | `3eb9c9a` | `e1bdd5d` |
+| Actualizar y validar | `18eb4a7` | `2962037` |
+| Eliminar y devolver 404 | `19ddfd5` | `8e2b540` |
+| Validar límites después de normalizar | `bf76048` | `c36e847` |
 
 Verificación final local: 14 pruebas aprobadas y 98 % de cobertura del código de `app`.
 
@@ -20,15 +20,15 @@ Verificación final local: 14 pruebas aprobadas y 98 % de cobertura del código 
 
 | Comportamiento | Commit rojo | Commit verde |
 | --- | --- | --- |
-| Listado vacío de la API | `24c5685` | `76c376c` |
-| Crear y validar en la API | `248c9e6` | `126fb1d` |
-| Consultar por ID y devolver 404 | `23a59ee` | `cb2543d` |
-| Actualizar una tarea | `c388398` | `f252999` |
-| Eliminar una tarea | `c9489ab` | `2dcf84f` |
-| Cargar y crear desde Vue | `876544f` | `e9ce970` |
-| Editar, eliminar y mostrar errores en Vue | `b08c783` | `12f524f` |
+| Listado vacío de la API | `aabc231` | `9386e06` |
+| Crear y validar en la API | `9790944` | `bedc127` |
+| Consultar por ID y devolver 404 | `5d36eda` | `8abf6d9` |
+| Actualizar una tarea | `7d80f77` | `5ffa3b9` |
+| Eliminar una tarea | `d238bcf` | `eb46811` |
+| Cargar y crear desde Vue | `e0ebe6c` | `b4302b6` |
+| Editar, eliminar y mostrar errores en Vue | `dcf185e` | `0a5dd4a` |
 
-El commit `71bd90f` agrega pruebas de caracterización del cliente HTTP cuando su comportamiento ya estaba presente. Se conserva como cobertura de regresión, pero no se presenta como un par rojo-verde.
+El commit `a76ed1b` agrega pruebas de caracterización del cliente HTTP cuando su comportamiento ya estaba presente. Se conserva como cobertura de regresión, pero no se presenta como un par rojo-verde.
 
 Verificación final local: 25 pruebas aprobadas y más de 90 % en las cuatro métricas de cobertura. También pasó la compilación de producción de Vite.
 
@@ -36,13 +36,13 @@ Verificación final local: 25 pruebas aprobadas y más de 90 % en las cuatro mé
 
 | Comportamiento | Commit rojo | Commit verde |
 | --- | --- | --- |
-| Listado vacío | `239e6e7` | `06b4c33` |
-| Crear y validar | `58e8ce9` | `9d10be2` |
-| Consultar por ID y devolver 404 | `6c7469c` | `e0b9c83` |
-| Actualizar y validar | `3124709` | `e48a406` |
-| Eliminar y devolver 404 | `a991ae9` | `a672bf2` |
+| Listado vacío | `78f451b` | `c34058e` |
+| Crear y validar | `9557c74` | `f88e046` |
+| Consultar por ID y devolver 404 | `21ece0e` | `5e299b2` |
+| Actualizar y validar | `515f755` | `c5d8b01` |
+| Eliminar y devolver 404 | `e4e7b9e` | `dd2aff0` |
 
-El commit `26f7eb6` agrega una prueba de caracterización sobre el orden y la representación del listado. Como ya pasaba al escribirse, se clasifica como protección de regresión y no como ciclo TDD rojo-verde.
+El commit `8c93ec6` agrega una prueba de caracterización sobre el orden y la representación del listado. Como ya pasaba al escribirse, se clasifica como protección de regresión y no como ciclo TDD rojo-verde.
 
 Verificación final local: 17 pruebas y 52 aserciones aprobadas. Pint confirmó el formato y Composer no encontró avisos de seguridad en las dependencias bloqueadas.
 
@@ -51,9 +51,9 @@ Verificación final local: 17 pruebas y 52 aserciones aprobadas. Pint confirmó 
 El ejemplo de Python puede inspeccionarse así:
 
 ```powershell
-git show dc7f609
-git show 64484b3
-git diff dc7f609^ 64484b3
+git show d034d7a
+git show 5ff760d
+git diff d034d7a^ 5ff760d
 ```
 
 Durante la explicación conviene señalar:
