@@ -48,3 +48,22 @@ def test_create_task_trims_title(client):
 
     assert response.status_code == 201
     assert response.json()["title"] == "Estudiar TDD"
+
+
+def test_get_existing_task_by_id(client):
+    created = client.post(
+        "/api/tasks",
+        json={"title": "Documentar", "completed": True},
+    ).json()
+
+    response = client.get(f"/api/tasks/{created['id']}")
+
+    assert response.status_code == 200
+    assert response.json() == created
+
+
+def test_get_missing_task_returns_404(client):
+    response = client.get("/api/tasks/999")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Task not found"}
