@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 
 from .repository import TaskRepository
 from .schemas import TaskCreate, TaskResponse, TaskUpdate
@@ -40,6 +40,12 @@ def create_app(database_path: Path | str | None = None) -> FastAPI:
         if task is None:
             raise HTTPException(status_code=404, detail="Task not found")
         return task
+
+    @app.delete("/api/tasks/{task_id}", status_code=204)
+    def delete_task(task_id: int) -> Response:
+        if not repository.delete(task_id):
+            raise HTTPException(status_code=404, detail="Task not found")
+        return Response(status_code=204)
 
     return app
 

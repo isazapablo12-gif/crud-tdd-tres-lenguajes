@@ -94,6 +94,15 @@ class TaskRepository:
 
         return self._to_dict(row)
 
+    def delete(self, task_id: int) -> bool:
+        with self._connect() as connection:
+            cursor = connection.execute(
+                "DELETE FROM tasks WHERE id = ?",
+                (task_id,),
+            )
+
+        return cursor.rowcount > 0
+
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
         connection.row_factory = sqlite3.Row
