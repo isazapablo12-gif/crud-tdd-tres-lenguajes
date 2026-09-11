@@ -66,6 +66,24 @@ export function createApp({ databasePath = defaultDatabasePath } = {}) {
     return response.status(201).json(toTask(task))
   })
 
+  app.get('/api/tasks/:taskId', (request, response) => {
+    const task = database
+      .prepare(
+        `
+          SELECT id, title, description, completed
+          FROM tasks
+          WHERE id = ?
+        `,
+      )
+      .get(request.params.taskId)
+
+    if (!task) {
+      return response.status(404).json({ error: 'Task not found' })
+    }
+
+    return response.json(toTask(task))
+  })
+
   return { app, database }
 }
 
