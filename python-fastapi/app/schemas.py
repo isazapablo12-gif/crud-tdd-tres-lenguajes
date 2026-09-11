@@ -15,6 +15,10 @@ class TaskCreate(BaseModel):
         return normalized
 
 
+class TaskUpdate(TaskCreate):
+    completed: bool
+
+
 class TaskResponse(BaseModel):
     id: int
     title: str

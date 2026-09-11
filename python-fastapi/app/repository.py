@@ -64,6 +64,36 @@ class TaskRepository:
 
         return self._to_dict(row) if row is not None else None
 
+    def update(
+        self,
+        task_id: int,
+        title: str,
+        description: str | None,
+        completed: bool,
+    ) -> dict | None:
+        with self._connect() as connection:
+            cursor = connection.execute(
+                """
+                UPDATE tasks
+                SET title = ?, description = ?, completed = ?
+                WHERE id = ?
+                """,
+                (title, description, int(completed), task_id),
+            )
+            if cursor.rowcount == 0:
+                return None
+
+            row = connection.execute(
+                """
+                SELECT id, title, description, completed
+                FROM tasks
+                WHERE id = ?
+                """,
+                (task_id,),
+            ).fetchone()
+
+        return self._to_dict(row)
+
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
         connection.row_factory = sqlite3.Row
