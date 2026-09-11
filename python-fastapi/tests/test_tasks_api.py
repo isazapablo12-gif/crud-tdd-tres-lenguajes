@@ -67,3 +67,39 @@ def test_get_missing_task_returns_404(client):
 
     assert response.status_code == 404
     assert response.json() == {"detail": "Task not found"}
+
+
+def test_update_existing_task_persists_changes(client):
+    created = client.post("/api/tasks", json={"title": "Borrador"}).json()
+    payload = {
+        "title": "Versión final",
+        "description": "Lista para exponer",
+        "completed": True,
+    }
+
+    response = client.put(f"/api/tasks/{created['id']}", json=payload)
+
+    assert response.status_code == 200
+    assert response.json() == {"id": created["id"], **payload}
+    assert client.get(f"/api/tasks/{created['id']}").json() == response.json()
+
+
+def test_update_task_rejects_invalid_data(client):
+    created = client.post("/api/tasks", json={"title": "Borrador"}).json()
+
+    response = client.put(
+        f"/api/tasks/{created['id']}",
+        json={"title": "   ", "description": None, "completed": False},
+    )
+
+    assert response.status_code == 422
+
+
+def test_update_missing_task_returns_404(client):
+    response = client.put(
+        "/api/tasks/999",
+        json={"title": "No existe", "description": None, "completed": False},
+    )
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Task not found"}
