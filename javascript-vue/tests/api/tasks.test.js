@@ -62,4 +62,25 @@ describe('Tasks API', () => {
     expect(response.status).toBe(201)
     expect(response.body.title).toHaveLength(100)
   })
+
+  test('gets an existing task by id', async () => {
+    const created = await createTask(app, { title: 'Documentar' })
+
+    const response = await request(app).get(`/api/tasks/${created.id}`)
+
+    expect(response.status).toBe(200)
+    expect(response.body).toEqual(created)
+  })
+
+  test('returns 404 when a task does not exist', async () => {
+    const response = await request(app).get('/api/tasks/999')
+
+    expect(response.status).toBe(404)
+    expect(response.body).toEqual({ error: 'Task not found' })
+  })
 })
+
+async function createTask(app, payload) {
+  const response = await request(app).post('/api/tasks').send(payload)
+  return response.body
+}
