@@ -7,7 +7,7 @@ Esta guía permite que cada integrante prepare uno de los tres lenguajes aunque 
 Después de recibir la URL del repositorio:
 
 ```powershell
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/isazapablo12-gif/crud-tdd-tres-lenguajes.git
 cd crud-tdd-tres-lenguajes
 code .
 ```

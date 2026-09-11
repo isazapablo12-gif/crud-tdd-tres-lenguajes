@@ -1,6 +1,10 @@
 # CRUD con TDD en tres lenguajes
 
+[![Verificación completa](https://github.com/isazapablo12-gif/crud-tdd-tres-lenguajes/actions/workflows/ci.yml/badge.svg)](https://github.com/isazapablo12-gif/crud-tdd-tres-lenguajes/actions/workflows/ci.yml)
+
 Proyecto académico que implementa el mismo administrador de tareas en tres lenguajes diferentes, sin Java ni Kotlin, y conserva evidencia del proceso de desarrollo guiado por pruebas (TDD).
+
+Repositorio público: [github.com/isazapablo12-gif/crud-tdd-tres-lenguajes](https://github.com/isazapablo12-gif/crud-tdd-tres-lenguajes)
 
 ## Implementaciones
 
