@@ -51,6 +51,19 @@ class TaskRepository:
 
         return self._to_dict(row)
 
+    def get(self, task_id: int) -> dict | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT id, title, description, completed
+                FROM tasks
+                WHERE id = ?
+                """,
+                (task_id,),
+            ).fetchone()
+
+        return self._to_dict(row) if row is not None else None
+
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
         connection.row_factory = sqlite3.Row
@@ -64,4 +77,3 @@ class TaskRepository:
             "description": row["description"],
             "completed": bool(row["completed"]),
         }
-

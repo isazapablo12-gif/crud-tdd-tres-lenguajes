@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from .repository import TaskRepository
 from .schemas import TaskCreate, TaskResponse
@@ -21,6 +21,13 @@ def create_app(database_path: Path | str | None = None) -> FastAPI:
     @app.post("/api/tasks", response_model=TaskResponse, status_code=201)
     def create_task(task: TaskCreate) -> dict:
         return repository.create(task.title, task.description, task.completed)
+
+    @app.get("/api/tasks/{task_id}", response_model=TaskResponse)
+    def get_task(task_id: int) -> dict:
+        task = repository.get(task_id)
+        if task is None:
+            raise HTTPException(status_code=404, detail="Task not found")
+        return task
 
     return app
 
