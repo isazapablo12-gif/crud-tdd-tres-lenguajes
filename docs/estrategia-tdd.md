@@ -46,12 +46,12 @@ No se hará squash de los ciclos cuya historia sea necesaria como evidencia.
 
 ## Evidencia
 
-La evidencia se compondrá de:
+La evidencia se compone de:
 
 - Pruebas automatizadas dentro de cada proyecto.
 - Historial de commits con prefijos `test`, `feat` y `refactor`.
 - Ejecuciones de integración continua en GitHub Actions.
-- Una tabla final de ciclos y pruebas en este documento o en un anexo.
+- La tabla de ciclos y resultados de [`evidencias-tdd.md`](evidencias-tdd.md).
 
 ## Aislamiento de pruebas
 
@@ -63,7 +63,8 @@ La evidencia se compondrá de:
 
 ## Cobertura
 
-La cobertura es un indicador complementario, no una demostración de TDD. La meta
-inicial será cubrir al menos el 80 % del código propio, priorizando comportamientos
-y ramas relevantes sobre líneas triviales de configuración.
-
+La cobertura es un indicador complementario, no una demostración de TDD. La
+automatización exige al menos el 80 % del código propio de Python y JavaScript,
+priorizando comportamientos y ramas relevantes sobre líneas triviales de
+configuración. PHPUnit se acompaña con comprobación de formato y auditoría de
+dependencias.

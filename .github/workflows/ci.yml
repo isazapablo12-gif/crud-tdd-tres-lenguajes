@@ -1,0 +1,94 @@
+name: Verificacion completa
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python-fastapi:
+    name: Python - FastAPI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python-fastapi
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v7
+
+      - name: Configurar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: python-fastapi/requirements.lock
+
+      - name: Instalar dependencias
+        run: python -m pip install -r requirements.lock
+
+      - name: Ejecutar pruebas y cobertura
+        run: python -m pytest --cov=app --cov-report=term-missing --cov-fail-under=80
+
+  javascript-vue:
+    name: JavaScript - Vue y Express
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: javascript-vue
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v7
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: javascript-vue/package-lock.json
+
+      - name: Instalar dependencias exactas
+        run: npm ci
+
+      - name: Ejecutar pruebas y cobertura
+        run: npm run test:coverage
+
+      - name: Compilar la interfaz
+        run: npm run build
+
+  php-laravel:
+    name: PHP - Laravel
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: php-laravel
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v7
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: fileinfo, mbstring, openssl, pdo_sqlite, sqlite3, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Instalar dependencias exactas
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Preparar Laravel
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Ejecutar pruebas
+        run: php artisan test --compact
+
+      - name: Comprobar formato
+        run: vendor/bin/pint --test
+
+      - name: Auditar dependencias
+        run: composer audit
