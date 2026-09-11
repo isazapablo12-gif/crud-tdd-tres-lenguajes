@@ -26,6 +26,12 @@ textarea {
   font: inherit;
 }
 
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+}
+
 .page-shell {
   width: min(760px, calc(100% - 2rem));
   margin: 0 auto;
@@ -108,6 +114,29 @@ button:disabled {
   opacity: 0.6;
 }
 
+.checkbox-row,
+.form-actions,
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+button.secondary {
+  color: #17656d;
+  background: #dcebec;
+}
+
+button.danger {
+  color: #8a2f2f;
+  background: #ffe0e0;
+}
+
+button.small {
+  padding: 0.45rem 0.65rem;
+  font-size: 0.78rem;
+}
+
 .section-heading {
   display: flex;
   align-items: center;
@@ -148,6 +177,17 @@ button:disabled {
   margin-bottom: 0.3rem;
 }
 
+.task-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.task-actions {
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
 .status {
   flex: 0 0 auto;
   padding: 0.35rem 0.55rem;
@@ -182,5 +222,8 @@ button:disabled {
   .task-card {
     flex-direction: column;
   }
-}
 
+  .task-actions {
+    justify-content: flex-start;
+  }
+}
