@@ -46,9 +46,9 @@ Como los commits están separados, se puede volver al estado exacto del commit r
 
 ```mermaid
 flowchart LR
-    A["Commit rojo<br/><code>test(...)</code><br/>solo el archivo de pruebas"]
+    A["Commit rojo · test(...)<br/>solo el archivo de pruebas"]
     B["La prueba FALLA<br/>el comportamiento no existe"]
-    C["Commit verde<br/><code>feat(...)</code><br/>solo el código de producción"]
+    C["Commit verde · feat(...)<br/>solo el código de producción"]
     D["La MISMA prueba PASA<br/>sin tocar el archivo de pruebas"]
 
     A --> B --> C --> D
