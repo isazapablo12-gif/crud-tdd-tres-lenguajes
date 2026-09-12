@@ -2,7 +2,15 @@
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
+
+# De .vscode se ignora todo menos las tareas y guiones que reproducen las
+# evidencias TDD, para que docs/evidencias-visuales.md se pueda repetir tal
+# cual. Se excluye el contenido y no la carpeta: Git no desciende a un
+# directorio ignorado, asi que las excepciones de adentro no tendrian efecto.
+.vscode/*
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/evidencias/
 
 # Variables y secretos
 .env
