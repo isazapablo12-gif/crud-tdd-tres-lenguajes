@@ -48,6 +48,7 @@ El script exige al menos 80 % de cobertura en Python y JavaScript, compila Vue, 
 - [Contrato común de la API](docs/contrato-api.md)
 - [Estrategia TDD](docs/estrategia-tdd.md)
 - [Evidencias TDD en Git](docs/evidencias-tdd.md)
+- [Evidencias de la aplicación de TDD, con ejecuciones rojo-verde](docs/evidencias-visuales.md)
 - [Guía para estudiar, probar y exponer](docs/guia-companeros.md)
 
 ## Estructura

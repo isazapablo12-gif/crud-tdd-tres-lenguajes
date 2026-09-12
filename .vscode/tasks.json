@@ -1,0 +1,128 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared",
+    "clear": true,
+    "showReuseMessage": false
+  },
+  "tasks": [
+    {
+      "label": "Sesion de capturas de evidencias TDD",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/sesion-capturas.ps1"
+      ],
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "presentation": {
+        "echo": false,
+        "reveal": "always",
+        "focus": true,
+        "panel": "dedicated",
+        "clear": true,
+        "showReuseMessage": false
+      }
+    },
+    {
+      "label": "Evidencia 1 - Python - suite completa y cobertura",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/01-suite-python.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 2 - JavaScript y Vue - suite completa y cobertura",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/02-suite-javascript.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 3 - PHP y Laravel - suite completa",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/03-suite-php.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 4 - Ciclo TDD Python - rojo y verde",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/04-ciclo-python.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 5 - Ciclo TDD JavaScript - rojo y verde",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/05-ciclo-javascript.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 6 - Ciclo TDD PHP - rojo y verde",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/06-ciclo-php.ps1"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Evidencia 7 - Historial git de pares test y feat",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/.vscode/evidencias/07-historial-git.ps1"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

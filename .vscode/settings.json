@@ -1,0 +1,11 @@
+{
+  "terminal.integrated.defaultLocation": "editor",
+  "terminal.integrated.fontSize": 11,
+  "terminal.integrated.cursorBlinking": false,
+  "workbench.panel.opensMaximized": "always",
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "update.showReleaseNotes": false,
+  "git.openRepositoryInParentFolders": "never",
+  "explorer.compactFolders": false
+}
