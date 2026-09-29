@@ -44,3 +44,10 @@ bootstrap/cache/*.php
 *.sqlite3
 *.db
 
+# Configuracion local de asistentes de IA
+.claude/
+.agents/
+.mcp.json
+CLAUDE.md
+AGENTS.md
+boost.json
